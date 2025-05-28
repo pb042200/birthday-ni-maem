@@ -6,6 +6,7 @@
   <title>Happy Birthday!</title>
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
     .font-pacifico {
@@ -46,19 +47,35 @@
       0% { background-position: -100%; }
       100% { background-position: 200%; }
     }
+
+    /* Balloon animation */
     .balloon {
       position: absolute;
       animation: float 6s ease-in-out infinite;
       z-index: 10;
+      cursor: pointer;
+      transition: transform 0.2s ease;
     }
+
     @keyframes float {
       0% { transform: translateY(0); }
       50% { transform: translateY(-20px); }
       100% { transform: translateY(0); }
     }
+
+    /* Pop animation */
+    @keyframes pop {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+    .balloon.popped {
+      animation: pop 0.4s forwards;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body class="bg-pink-100 text-pink-700 font-bold min-h-screen flex flex-col items-center justify-center text-center select-none font-pacifico overflow-hidden">
+
   <!-- Birthday Song -->
   <audio autoplay loop>
     <source src="https://www2.cs.uic.edu/~i101/SoundFiles/HappyBirthday.mp3" type="audio/mpeg">
@@ -66,21 +83,23 @@
   </audio>
 
   <!-- Confetti -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <script>
     setInterval(() => {
-      confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
     }, 3000);
   </script>
 
- <!-- Floating Balloons (Left & Right Only) -->
-<img src="balloon.png" class="balloon left-2 top-12" style="animation-delay: 0s;">
-<img src="balloon.png" class="balloon left-2 top-32" style="animation-delay: 1.5s;">
-<img src="balloon.png" class="balloon left-2 top-52" style="animation-delay: 3s;">
-
-<img src="balloon.png" class="balloon right-2 top-16" style="animation-delay: 0.5s;">
-<img src="balloon.png" class="balloon right-2 top-36" style="animation-delay: 2s;">
-<img src="balloon.png" class="balloon right-2 top-56" style="animation-delay: 3.5s;">
+  <!-- Floating Balloons (Clickable) -->
+  <img src="balloon.png" class="balloon left-4 top-16 w-20 sm:w-24 md:w-28" style="animation-delay: 0s;" onclick="popBalloon(this)">
+  <img src="balloon.png" class="balloon left-8 top-32 w-20 sm:w-24 md:w-28" style="animation-delay: 1.5s;" onclick="popBalloon(this)">
+  <img src="balloon.png" class="balloon left-12 top-52 w-20 sm:w-24 md:w-28" style="animation-delay: 3s;" onclick="popBalloon(this)">
+  <img src="balloon.png" class="balloon right-4 top-20 w-20 sm:w-24 md:w-28" style="animation-delay: 0.5s;" onclick="popBalloon(this)">
+  <img src="balloon.png" class="balloon right-8 top-36 w-20 sm:w-24 md:w-28" style="animation-delay: 2s;" onclick="popBalloon(this)">
+  <img src="balloon.png" class="balloon right-12 top-56 w-20 sm:w-24 md:w-28" style="animation-delay: 3.5s;" onclick="popBalloon(this)">
 
   <!-- Banner with Cake -->
   <header class="mb-16 birthday-title relative">
@@ -105,7 +124,15 @@
     </section>
   </main>
 
+  <!-- Pop Balloon Script -->
   <script>
+    function popBalloon(element) {
+      element.classList.add('popped');
+      setTimeout(() => {
+        element.remove(); // Remove after animation
+      }, 400);
+    }
+
     function openMessage() {
       window.location.href = "page3.html";
     }
