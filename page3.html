@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ehe</title>
+  <style>
+    body {
+      background-color: #ffe6f0;
+      font-family: 'Georgia', serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 1rem;
+      text-align: center;
+      color: #660033;
+      overflow-x: hidden;
+    }
+    .paper {
+      background: #fffdf7 url('https://www.transparenttextures.com/patterns/cream-paper.png');
+      border: 2px dashed #f9a8d4;
+      border-radius: 1rem;
+      padding: 2rem 2.5rem;
+      max-width: 600px;
+      box-shadow: 3px 3px 15px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .paper h1 {
+      color: #d63384;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .paper p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      text-align: left;
+      font-family: 'Georgia', serif;
+      letter-spacing: 0.02em;
+      margin: 0;
+    }
+    .pen {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      width: 90px;
+      transform: rotate(-30deg);
+      user-select: none;
+      pointer-events: none;
+    }
+    .heart-sticker {
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      width: 50px;
+      user-select: none;
+      pointer-events: none;
+    }
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ps-link {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.2rem;
+      background-color: #ffb6c1;
+      color: #660033;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+    .ps-link:hover {
+      background-color: #ffa6c9;
+    }
+  </style>
+</head>
+<body>
+  <div class="paper" role="main" aria-label="Birthday message">
+    <img src="psyduck-deliciousdaywithpokemon.gif" alt="Heart sticker" class="heart-sticker" />
+    <h1>Happy Birthday, Maem! 🥳</h1>
+    <p>
+Hitting the message button on Reddit was one of the best decisions I’ve ever made.<br><br>
+I don’t know when you’ll read this or if I’ll even finish all this kaartehan but here I am. Napagod na nga ako kakasulat (evidence: yung kinagat kong lapis sa gilid, HAHA). Just wanted to send something special chos!<br><br>
+I never regretted messaging you that night. It’s been almost a year now, and somehow, I ended up with a human diary HAHA. Thanks you for listening to my endless dilemmas in life, school, and overthinking. Thanks for being there when I needed someone most.<br><br>
+You might not realize it, but you’ve made a huge impact on my life. You keep me going especially when I want to give up (aka every week, LOL). I appreciate your presence even if we don’t talk every day because life gets hectic, you still make me feel seen and understood.<br><br>
+Also… sorry if I don’t always fully reciprocate or fall short when you share your thoughts. Sometimes I get caught up and miss the chance to respond the way you deserve. But please know I do care. A lot.<br><br>
+You make everything feel lighter just by being around (or ako lang ba nakakafeel? Doesn’t matter). I feel so lucky to know someone as amazing (AMAZING!?) as you. Grabe, I don’t even know how to explain it, but yeah, sometimes I get overwhelmed.<br><br>
+More than anything, I’m rooting for your happiness and success. May your life be filled with love, happiness, and yes, lots of money. You deserve it all.<br><br>
+No matter what happens, you’ll always have a special place in my heart. I’ll be here quietly cheering for you. Basta, nandito lang ako. Take care always.<br><br>
+From your friendly neighborhood lowblood with no permanent address,<br>
+Dey
+    </p>
+
+    <a href="page4.html" class="ps-link">
+      P.S. I’ll know you finished reading this message if you view my favorite picture of you… Click me.
+    </a>
+
+    <img src="1000065956.png" alt="Pen with bite marks" class="pen" />
+  </div>
+
+  <canvas id="confetti" class="confetti"></canvas>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    const confettiCanvas = document.getElementById('confetti');
+    const confettiInstance = confetti.create(confettiCanvas, {
+      resize: true,
+      useWorker: true
+    });
+
+    function randomConfetti() {
+      confettiInstance({
+        particleCount: 5,
+        spread: 60,
+        origin: { x: Math.random(), y: Math.random() * 0.5 },
+        colors: ['#ff69b4', '#ffb6c1', '#ffc0cb', '#ff1493'],
+        gravity: 0.4,
+        scalar: 0.7,
+        ticks: 200
+      });
+    }
+
+    setInterval(randomConfetti, 400);
+  </script>
+</body>
+</html>
